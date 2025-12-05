@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ramkishor Sevda — Data Analyst Portfolio</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <style>
+    :root{
+      --primary: #4f46e5;
+      --accent: #10b981;
+      --bg: #f7fafc;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --dark: #0f1724;
+      --radius: 14px;
+      --soft-shadow: 0 10px 30px rgba(15,23,42,0.08);
+      --deep-shadow: 0 18px 45px rgba(15,23,42,0.12);
+      --glass: rgba(255,255,255,0.6);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #eef2ff 0%, #f9fafb 60%);
+      color:var(--dark);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    a{color:inherit;text-decoration:none}
+
+    .container{max-width:1120px;margin:0 auto;padding:0 20px}
+
+    /* NAV */
+    header.navbar{
+      position:sticky;top:0;z-index:60;background:#ffffffcc;backdrop-filter:blur(6px);
+      border-bottom:1px solid rgba(15,23,42,0.06);
+    }
+    .navbar-inner{display:flex;align-items:center;justify-content:space-between;height:72px;max-width:1120px;margin:0 auto;padding:0 20px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--dark)}
+    .brand-badge{width:36px;height:36px;border-radius:999px;background:linear-gradient(135deg,var(--primary),#8b5cf6);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;box-shadow:0 8px 20px rgba(79,70,229,0.22)}
+    nav.nav-links{display:flex;gap:18px;align-items:center;color:var(--muted)}
+    nav.nav-links a{position:relative;padding-bottom:4px;font-weight:600}
+    nav.nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:999px;transition:width .25s ease}
+    nav.nav-links a:hover::after{width:100%}
+    .nav-cta{background:#fff;border:1px solid rgba(79,70,229,0.12);padding:8px 12px;border-radius:999px;color:var(--primary);font-weight:700;box-shadow:0 8px 18px rgba(79,70,229,0.08);display:inline-flex;gap:8px;align-items:center}
+    .nav-toggle{display:none}
+
+    /* HERO */
+    section.hero{padding:48px 0 64px}
+    .hero-grid{display:grid;grid-template-columns:1.2fr .9fr;gap:28px;align-items:center}
+    .hero-kicker{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(79,70,229,0.08);color:var(--primary);font-weight:700;font-size:13px}
+    .hero-title{font-size:2.6rem;line-height:1.05;margin-top:14px;color:var(--dark);font-weight:800}
+    .hero-title .highlight{background:linear-gradient(90deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero-subtitle{color:var(--muted);margin-top:14px;max-width:44rem}
+    .hero-summary{margin-top:16px;border-left:3px solid rgba(79,70,229,0.14);padding-left:12px;color:#334155;max-width:44rem}
+    .hero-actions{display:flex;gap:12px;margin-top:20px}
+
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:12px;font-weight:700;cursor:pointer;border:none;
+      box-shadow:0 10px 30px rgba(79,70,229,0.12);
+    }
+    .btn-primary{background:linear-gradient(135deg,var(--primary),#7c3aed);color:#fff}
+    .btn-secondary{background:#fff;border:1px solid rgba(15,23,42,0.06);color:var(--dark)}
+
+    .hero-meta{display:flex;gap:18px;color:var(--muted);margin-top:16px;font-weight:600}
+    .hero-meta i{color:var(--primary);margin-right:6px}
+
+    /* HERO PHOTO */
+    .hero-photo-wrapper{display:flex;justify-content:center;align-items:center}
+    .hero-orbit{width:290px;height:290px;border-radius:999px;background:radial-gradient(circle at 20% 10%, #c7d2fe, #4f46e5);box-shadow:0 25px 65px rgba(15,23,42,0.14);position:relative;overflow:visible}
+    .hero-orbit-inner{position:absolute;inset:12px;border-radius:inherit;background:conic-gradient(from 200deg,#111827 0,#1e40af 40,#111827 100%);opacity:0.06}
+    .hero-photo{position:absolute;inset:24px;border-radius:inherit;overflow:hidden;border:3px solid rgba(255,255,255,0.9)}
+    .hero-photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .hero-badge{position:absolute;right:-8px;top:18%;background:#fff;padding:8px 12px;border-radius:999px;display:flex;gap:8px;align-items:center;box-shadow:0 12px 35px rgba(15,23,42,0.12)}
+    .hero-pill{position:absolute;left:-18px;bottom:12%;background:rgba(15,23,42,0.85);color:#e6eef8;padding:8px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:10px}
+
+    /* Sections */
+    section{padding:44px 0}
+    .section-header{text-align:center;margin-bottom:28px}
+    .section-kicker{color:var(--primary);font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+    .section-title{font-size:1.8rem;font-weight:800;color:var(--dark);margin-bottom:6px}
+    .section-subtitle{color:var(--muted);max-width:56rem;margin:0 auto}
+
+    /* About */
+    .about-grid{display:grid;grid-template-columns:1fr 420px;gap:24px;align-items:start}
+    .card{background:var(--card);border-radius:16px;padding:20px;box-shadow:var(--soft-shadow);border:1px solid rgba(15,23,42,0.03)}
+    .about-card h3{font-size:1.1rem;margin-bottom:10px}
+    .about-meta{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px;color:var(--muted);font-weight:600}
+    .about-actions{margin-top:14px;display:flex;gap:10px}
+    .about-item{background:linear-gradient(180deg,#0f1724 0%, #0b1220 80%);color:#e6eef8;padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(2,6,23,0.5)}
+
+    /* Certifications */
+    .cert-grid{display:flex;flex-direction:column;gap:10px}
+    .cert-item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;background:linear-gradient(180deg,#fff,#fff);border:1px solid rgba(15,23,42,0.04);box-shadow:var(--deep-shadow)}
+    .cert-item a{color:var(--primary);font-weight:700}
+
+    /* Skills */
+    .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .skill-card{background:var(--card);padding:16px;border-radius:12px;border:1px solid rgba(15,23,42,0.03);box-shadow:var(--soft-shadow)}
+    .skill-title{font-weight:700;margin-bottom:8px}
+    .tag{display:inline-block;background:#f1f5f9;padding:6px 8px;border-radius:999px;color:#0f1724;margin-right:8px;margin-bottom:8px;font-size:13px}
+
+    /* Projects */
+    .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .project-card{border-radius:12px;background:var(--card);box-shadow:var(--deep-shadow);overflow:hidden;border:1px solid rgba(15,23,42,0.04)}
+    .project-body{padding:16px}
+    .project-title{font-weight:800;margin-bottom:6px}
+    .project-meta{color:var(--muted);font-weight:600;margin-bottom:10px}
+    .project-list{padding-left:18px;color:#374151;margin-bottom:12px}
+    .chip-link{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;background:#fff;border:1px solid rgba(15,23,42,0.04);box-shadow:0 8px 22px rgba(15,23,42,0.06);font-weight:700;color:var(--primary)}
+
+    /* Contact */
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+    .form-input,.form-textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);background:#fff;outline:none;font-size:14px;box-shadow:0 6px 18px rgba(15,23,42,0.04)}
+    .form-input:focus,.form-textarea:focus{border-color:var(--primary);box-shadow:0 8px 28px rgba(79,70,229,0.12)}
+    .btn-submit{padding:12px 16px;border-radius:10px;border:none;background:linear-gradient(90deg,var(--primary),#7c3aed);color:#fff;font-weight:800;cursor:pointer;box-shadow:0 12px 30px rgba(79,70,229,0.14)}
+    .contact-card .contact-item{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start}
+    .contact-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--primary),#7c3aed);color:#fff}
+
+    /* Footer */
+    footer.footer{background:#020617;color:#95a3b6;padding:22px 0;margin-top:18px;border-top:1px solid rgba(255,255,255,0.02)}
+    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+
+    /* responsive */
+    @media(max-width:900px){
+      .hero-grid{grid-template-columns:1fr}
+      .hero-photo-wrapper{order:-1;margin-bottom:20px}
+      .about-grid{grid-template-columns:1fr}
+      .skills-grid{grid-template-columns:1fr}
+      .projects-grid{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+      nav.nav-links{display:none}
+      .nav-toggle{display:block}
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <header class="navbar">
+    <div class="navbar-inner container">
+      <div class="brand">
+        <div class="brand-badge">R</div>
+        <div>Ramkishor Sevda</div>
+      </div>
+
+      <nav class="nav-links" id="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div style="display:flex;gap:12px;align-items:center">
+        <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+          <i class="fa-solid fa-paper-plane"></i> Contact
+        </button>
+        <button class="nav-toggle" id="nav-toggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="hero-kicker"><i class="fa-solid fa-chart-line"></i> DATA ANALYST • SQL • POWER BI</div>
+          <h1 class="hero-title">Hi, I'm <span class="highlight">Ramkishor Sevda</span></h1>
+          <p class="hero-subtitle">Data Analyst experienced in SQL, Power BI, Python and Excel — building dashboards and analyses that help teams make faster, data-driven decisions.</p>
+          <p class="hero-summary">Analytical and detail-oriented. Reduced reporting time by <strong>30%</strong> and created KPI-driven dashboards used by business teams to improve performance tracking.</p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://drive.google.com/file/d/1Ps0NCjZBmsDZe3RQjIL8ysl9Qx615ZEW/view?usp=sharing" target="_blank" rel="noreferrer">
+              <i class="fa-solid fa-file-arrow-down"></i> Download Resume
+            </a>
+            <button class="btn btn-secondary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">
+              <i class="fa-solid fa-folder-open"></i> View Projects
+            </button>
+          </div>
+
+          <div class="hero-meta" style="margin-top:18px">
+            <div><i class="fa-solid fa-location-dot"></i> Bangalore, India</div>
+            <div><i class="fa-solid fa-envelope"></i> ramkishor592006@gmail.com</div>
+            <div><i class="fa-solid fa-phone"></i> +91 9785454204</div>
+          </div>
+        </div>
+
+        <div class="hero-photo-wrapper">
+          <div class="hero-orbit">
+            <div class="hero-orbit-inner"></div>
+            <div class="hero-photo"><img src="Rk.jpg" alt="Profile photo of Ramkishor"/></div>
+            <div class="hero-badge"><i class="fa-solid fa-database"></i><div style="font-size:13px;font-weight:700">SQL & BI Focused</div></div>
+            <div class="hero-pill"><span style="width:8px;height:8px;border-radius:999px;background:#22c55e;display:inline-block;margin-right:8px"></span>Open to Data Analyst roles</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">About</div>
+          <div class="section-title">Who I am</div>
+          <div class="section-subtitle">BCA graduate and Data Analyst with hands-on experience building dashboards and SQL analyses for business insights.</div>
+        </div>
+
+        <div class="about-grid">
+          <article class="card about-card">
+            <h3>My Journey into Data</h3>
+            <p>I’m a Data Analyst with a Bachelor of Computer Applications from <strong>Maharshi Dayanand Saraswati University, Ajmer</strong>, currently based in <strong>Bangalore</strong>. I work with SQL, Power BI, Python and Excel to turn raw data into clear business insights.</p>
+            <p>Recently built projects include an <strong>E-Commerce Sales Analytics Dashboard</strong> and a <strong>Pizza Sales SQL Analysis</strong> focused on KPIs, trends and actionable recommendations.</p>
+
+            <div class="about-meta" style="margin-top:12px">
+              <div><i class="fa-solid fa-graduation-cap"></i> BCA, First Division (986 / 1400)</div>
+              <div><i class="fa-solid fa-database"></i> SQL • Power BI • Excel • Python</div>
+              <div><i class="fa-solid fa-location-dot"></i> Bangalore (from Rajasthan)</div>
+              <div><i class="fa-solid fa-user-check"></i> Open to Data / BI roles</div>
+            </div>
+
+            <div class="about-actions">
+              <a class="btn btn-primary" href="mailto:ramkishor592006@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a>
+              <a class="btn btn-secondary" href="https://github.com/ramkishor-sevda" target="_blank" rel="noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+            </div>
+          </article>
+
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <!-- Highlights -->
+            <div class="about-item">
+              <strong>Analytics & Reporting</strong>
+              <div style="margin-top:6px;color:#cbd5f5">Built KPI-driven dashboards in Power BI and Excel for sales and operations—tracking revenue, profit and customer behaviour.</div>
+            </div>
+
+            <!-- Certifications -->
+            <div class="card" style="padding:12px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                <div style="font-weight:800">Certifications</div>
+                <div style="color:var(--muted)">Verified Certificates</div>
+              </div>
+
+              <div class="cert-grid">
+                <div class="cert-item">
+                  <div>
+                    <div style="font-weight:700">Data Analysis with Python — IBM (Cognitive Class)</div>
+                    <div style="font-size:13px;color:var(--muted)">Hands-on data cleaning, visualization & statistical analysis (DA0101EN)</div>
+                  </div>
+                  <div><a href="https://drive.google.com/file/d/1L78k3NjQXcMEERGP4Qa6yv0o6TCdiBLC/view?usp=drive_link" target="_blank" rel="noreferrer">View certificate</a></div>
+                </div>
+
+                <div class="cert-item">
+                  <div>
+                    <div style="font-weight:700">SQL for Data Analysis — Certificate</div>
+                    <div style="font-size:13px;color:var(--muted)">Advanced SQL concepts including joins, window functions and reporting.</div>
+                  </div>
+                  <div><a href="https://drive.google.com/file/d/1PAE8NYS-8CYxddzf5rXj78ZiS5J2Lf5A/view?usp=drive_link" target="_blank" rel="noreferrer">View certificate</a></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="skills">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">Skills & Tools</div>
+          <div class="section-title">What I work with</div>
+          <div class="section-subtitle">Focused toolkit around SQL, Python and BI tools to handle data from raw tables to final dashboards.</div>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-card card">
+            <div class="skill-title">Data Analytics</div>
+            <div style="color:var(--muted)">From raw data to insights</div>
+            <div style="margin-top:10px">
+              <span class="tag">Data Cleaning</span>
+              <span class="tag">EDA</span>
+              <span class="tag">KPI Design</span>
+              <span class="tag">Statistical Analysis</span>
+            </div>
+          </div>
+
+          <div class="skill-card card">
+            <div class="skill-title">Programming & Querying</div>
+            <div style="color:var(--muted)">Working with data at scale</div>
+            <div style="margin-top:10px">
+              <span class="tag">SQL</span>
+              <span class="tag">Python</span>
+              <span class="tag">Pandas</span>
+              <span class="tag">NumPy</span>
+              <span class="tag">DAX</span>
+              <span class="tag">ETL</span>
+            </div>
+          </div>
+
+          <div class="skill-card card">
+            <div class="skill-title">BI & Visualization</div>
+            <div style="color:var(--muted)">Telling stories with charts</div>
+            <div style="margin-top:10px">
+              <span class="tag">Power BI</span>
+              <span class="tag">Tableau</span>
+              <span class="tag">Excel Dashboards</span>
+              <span class="tag">Pivot Tables</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS (ONLY 2) -->
+    <section id="projects" class="projects">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">Projects</div>
+          <div class="section-title">Selected work</div>
+          <div class="section-subtitle">End-to-end projects built using SQL, Power BI and Excel—focused on business impact.</div>
+        </div>
+
+        <div class="projects-grid">
+          <!-- E-COMMERCE -->
+          <article class="project-card">
+            <div class="project-body">
+              <div class="project-title">E-Commerce Sales Analytics Dashboard</div>
+              <div class="project-meta">Power BI • Excel — Nov 2025</div>
+              <p class="project-desc">Built a Power BI dashboard to analyze 5.6K+ orders across states, categories, payment modes and customers — highlighting performance and opportunities.</p>
+              <ul class="project-list">
+                <li>Tracked KPIs: Total Quantity (5615), Total Sales (438K), AOV (121K), Total Profit (37K).</li>
+                <li>Visualized state-wise sales, category-wise quantity, payment-mode split and monthly profit trends.</li>
+                <li>Key insight: Clothing 63% share; COD 44% orders — informed merchandising decisions.</li>
+              </ul>
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div style="font-weight:700;color:var(--muted)">Tools: Power BI, Excel</div>
+                <div><a class="chip-link" href="https://github.com/ramkishor-sevda/Ecommerce-Sales-Dashboard-PowerBI" target="_blank" rel="noreferrer"><i class="fa-brands fa-github"></i> View code</a></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PIZZA SALES -->
+          <article class="project-card">
+            <div class="project-body">
+              <div class="project-title">Pizza Sales Analysis</div>
+              <div class="project-meta">SQL • Excel — 2025</div>
+              <p class="project-desc">SQL-driven analysis to understand orders, revenue trends and product performance for a pizza outlet.</p>
+              <ul class="project-list">
+                <li>Calculated KPIs: Total Revenue, Total Orders, Total Pizzas Sold and Average Order Value.</li>
+                <li>Analyzed daily/monthly order trends, category & size revenue share using GROUP BY and aggregates.</li>
+                <li>Identified top & bottom pizzas to support menu and marketing decisions.</li>
+              </ul>
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div style="font-weight:700;color:var(--muted)">Tools: SQL, Excel</div>
+                <div><a class="chip-link" href="https://github.com/ramkishor-sevda/Pizza-Sales-Analysis-Project-SQL" target="_blank" rel="noreferrer"><i class="fa-brands fa-github"></i> View code</a></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">Contact</div>
+          <div class="section-title">Let's connect</div>
+          <div class="section-subtitle">Internship, entry role or freelance analytics work — I'd love to hear about it.</div>
+        </div>
+
+        <div class="contact-grid">
+          <aside class="card contact-card">
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div>
+                <div style="font-weight:800">Email</div>
+                <div style="color:var(--muted)">Primary: <a href="mailto:ramkishor592006@gmail.com">ramkishor592006@gmail.com</a></div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+              <div>
+                <div style="font-weight:800">Phone</div>
+                <div style="color:var(--muted)">+91 9785454204</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div>
+                <div style="font-weight:800">Location</div>
+                <div style="color:var(--muted)">Bangalore, India</div>
+              </div>
+            </div>
+
+            <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+              <a class="chip-link" href="https://github.com/ramkishor-sevda" target="_blank" rel="noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+              <a class="chip-link" href="#" title="Add your LinkedIn" style="background:#eef2ff;border:1px solid rgba(79,70,229,0.06);color:var(--primary)"> <i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            </div>
+          </aside>
+
+          <section class="card form-card">
+            <h3 style="margin-bottom:8px">Send me a message</h3>
+            <p style="color:var(--muted);margin-bottom:12px">This form uses <strong>FormSubmit</strong> to deliver messages directly to my Gmail.</p>
+
+            <!-- formsubmit will send email to ramkishor592006@gmail.com -->
+            <form id="contactForm" action="https://formsubmit.co/ramkishor592006@gmail.com" method="POST">
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_subject" value="New message from portfolio" />
+              <!-- redirect back to same page after submit -->
+              <input type="hidden" name="_next" value="https://formsubmit.co/thank-you" />
+
+              <div style="margin-bottom:10px">
+                <label for="name" style="font-weight:700;margin-bottom:6px;display:block">Name</label>
+                <input class="form-input" id="name" name="name" type="text" required placeholder="Your name">
+              </div>
+
+              <div style="margin-bottom:10px">
+                <label for="email" style="font-weight:700;margin-bottom:6px;display:block">Email</label>
+                <input class="form-input" id="email" name="email" type="email" required placeholder="name@example.com">
+              </div>
+
+              <div style="margin-bottom:10px">
+                <label for="subject" style="font-weight:700;margin-bottom:6px;display:block">Subject</label>
+                <input class="form-input" id="subject" name="subject" type="text" required placeholder="How can I help?">
+              </div>
+
+              <div style="margin-bottom:12px">
+                <label for="message" style="font-weight:700;margin-bottom:6px;display:block">Message</label>
+                <textarea class="form-textarea" id="message" name="message" rows="5" required placeholder="Write your message..."></textarea>
+              </div>
+
+              <div style="display:flex;justify-content:flex-end">
+                <button type="submit" class="btn-submit"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+              </div>
+            </form>
+            <div id="formNote" style="margin-top:10px;color:var(--muted);font-size:13px">You will receive a confirmation by email. If you don't get it, check spam or contact directly.</div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div>&copy; 2025 <strong>Ramkishor Sevda</strong> • Data Analyst</div>
+        <div style="display:flex;gap:12px">
+          <a href="#home" style="color:inherit">Top</a>
+          <a href="#projects" style="color:inherit">Projects</a>
+          <a href="mailto:ramkishor592006@gmail.com" style="color:inherit">Email</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    if(navToggle){
+      navToggle.addEventListener('click', ()=> {
+        navLinks.classList.toggle('mobile-open');
+      });
+    }
+
+    // Form submit: show friendly alert (FormSubmit handles actual email delivery)
+    const contactForm = document.getElementById('contactForm');
+    if(contactForm){
+      contactForm.addEventListener('submit', function(e){
+        // show a quick friendly message — actual POST will still happen via FormSubmit
+        setTimeout(()=> {
+          alert('धन्यवाद! आपका संदेश भेज दिया गया है — मैं जल्द ही reply करूँगा।');
+        }, 400);
+      });
+    }
+  </script>
+</body>
+</html>
